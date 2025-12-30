@@ -1,1 +1,52 @@
-databaseChangeLog: []
+databaseChangeLog:
+  - changeSet:
+      id: 001-create-processed-events
+      author: vargontoc
+      changes:
+        - createTable:
+            tableName: processed_events
+            columns: 
+              - column:
+                  name: event_id
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: processed_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 002-create-notifications
+      author: vargontoc
+      changes:
+        - createTable:
+            tableName: notifications
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: event_id
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: message
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+        - createIndex:
+            tableName: notifications
+            indexName: idx_notifications_event_id
+            columns:
+              - column:
+                  name: event_id

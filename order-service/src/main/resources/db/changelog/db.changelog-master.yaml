@@ -1,1 +1,91 @@
-databaseChangeLog: []
+databaseChangeLog:
+  - changeSet:
+      id: 001-create-orders
+      author: vargontoc
+      changes:
+        - createTable:
+            tableName: orders
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: total_amount
+                  type: numeric(10,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+        - createIndex:
+            tableName: orders
+            indexName: idx_orders_created_at
+            columns:
+              - column:
+                  name: created_at
+          
+  - changeSet:
+      id: 002-create-outbox-events
+      author: vargontoc
+      changes:
+        - createTable:
+            tableName: outbox_events
+            columns:
+              - column:
+                  name: id  
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: aggregate_type
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: aggregate_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: event_type
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: payload
+                  type: json
+                  constraints:
+                    nullable: false
+              - column:
+                  name: occurred_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: published_at
+                  type: timestamp
+                  constraints:
+                    nullable: true
+        - createIndex:
+            tableName: outbox_events
+            indexName: idx_events_occurred_at
+            columns:
+              - column:
+                  name: occurred_at
+        - createIndex:
+            tableName: outbox_events
+            indexName: idx_events_published_at
+            columns:
+              - column:
+                  name: published_at
