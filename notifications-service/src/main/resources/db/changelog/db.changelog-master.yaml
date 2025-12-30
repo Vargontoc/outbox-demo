@@ -8,7 +8,7 @@ databaseChangeLog:
             columns: 
               - column:
                   name: event_id
-                  type: varchar(20)
+                  type: uuid
                   constraints:
                     nullable: false
               - column:
@@ -31,7 +31,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: event_id
-                  type: varchar(20)
+                  type: uuid
                   constraints:
                     nullable: false
               - column:

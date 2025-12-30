@@ -47,7 +47,7 @@ public class OrderService {
         UUID eventId = UUID.randomUUID();
 
         // Crear objeto para el payload
-        var eventData = new OrderCreatedEvent(orderId, request.totalAmount(), "CREATED", now);
+        var eventData = new OrderCreatedEvent(eventId, orderId, request.totalAmount(), "CREATED", now);
 
         String payload;
         try {
@@ -63,7 +63,7 @@ public class OrderService {
     }
 
     // DTO interno para el evento
-    private record OrderCreatedEvent(UUID orderId, java.math.BigDecimal totalAmount, String status,
+    private record OrderCreatedEvent(UUID eventId, UUID orderId, java.math.BigDecimal totalAmount, String status,
             OffsetDateTime occurredAt) {
     }
 }
