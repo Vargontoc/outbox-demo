@@ -13,15 +13,15 @@ import es.vargontoc.outbox.api.dto.CreateOrderRequest;
 import es.vargontoc.outbox.persistence.domain.OrderEntity;
 import es.vargontoc.outbox.persistence.domain.OutboxEventEntity;
 import es.vargontoc.outbox.persistence.repositories.OrderJpaRepository;
-import es.vargontoc.outbox.persistence.repositories.OuboxEventJpaRepository;
+import es.vargontoc.outbox.persistence.repositories.OutboxEventJpaRepository;
 
 @Service
 public class OrderService {
     private final OrderJpaRepository orderJpaRepository;
-    private final OuboxEventJpaRepository ouboxEventJpaRepository;
+    private final OutboxEventJpaRepository ouboxEventJpaRepository;
     private final ObjectMapper objectMapper;
 
-    public OrderService(OrderJpaRepository orderJpaRepository, OuboxEventJpaRepository ouboxEventJpaRepository,
+    public OrderService(OrderJpaRepository orderJpaRepository, OutboxEventJpaRepository ouboxEventJpaRepository,
             ObjectMapper objectMapper) {
         this.orderJpaRepository = orderJpaRepository;
         this.ouboxEventJpaRepository = ouboxEventJpaRepository;

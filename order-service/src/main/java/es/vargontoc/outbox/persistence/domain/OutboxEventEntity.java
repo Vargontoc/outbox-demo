@@ -80,4 +80,7 @@ public class OutboxEventEntity {
         return publishedAt;
     }
 
+    public void setPublishedAt(OffsetDateTime publishedAt) {
+        this.publishedAt = publishedAt;
+    }
 }
