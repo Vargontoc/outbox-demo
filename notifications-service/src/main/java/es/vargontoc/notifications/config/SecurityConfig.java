@@ -1,20 +1,18 @@
-package es.vargontoc.outbox.config;
+package es.vargontoc.notifications.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import es.vargontoc.outbox.security.ApiKeyAuthFilter;
+import es.vargontoc.notifications.security.ApiKeyAuthFilter;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Configuration
 public class SecurityConfig {
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, @Value("${security.api.key}") String apiKey)
             throws Exception {
