@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import es.vargontoc.notifications.obs.CorrelationIdFilter;
@@ -33,8 +32,8 @@ public class SecurityConfig {
                                 .formLogin(fl -> fl.disable())
                                 .logout(l -> l.disable());
 
-                http.addFilterAfter(new ApiKeyAuthFilter(apiKey), BasicAuthenticationFilter.class);
-                http.addFilterBefore(new CorrelationIdFilter(), CorrelationIdFilter.class);
+                http.addFilterBefore(new CorrelationIdFilter(), BasicAuthenticationFilter.class);
+                http.addFilterAfter(new ApiKeyAuthFilter(apiKey), CorrelationIdFilter.class);
                 return http.build();
         }
 }
