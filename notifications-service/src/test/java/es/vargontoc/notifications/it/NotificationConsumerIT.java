@@ -20,6 +20,7 @@ public class NotificationConsumerIT extends IntegrationTestBase {
     ProcessedEventRepository processedRepo;
 
     @Test
+    @SuppressWarnings("null")
     void consumingMessage_createsNotification_once_idempotent() throws Exception {
         UUID eventId = UUID.randomUUID();
         UUID orderId = UUID.randomUUID();

@@ -40,7 +40,8 @@ public class OutboxPublishIT extends IntegrationTestBase {
         // Consumimos 1 mensaje de la cola para validar que salió
         Object msg = rabbitTemplate.receiveAndConvert("notifications.queue");
         assertThat(msg).isNotNull();
-        assertThat(msg.toString()).contains("\"eventId\"");
-        assertThat(msg.toString()).contains("\"orderId\"");
+        String body = String.valueOf(msg);
+        assertThat(body).contains("\"eventId\"");
+        assertThat(body).contains("\"orderId\"");
     }
 }
